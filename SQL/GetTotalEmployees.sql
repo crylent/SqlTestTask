@@ -1,0 +1,4 @@
+CREATE PROCEDURE GetTotalEmployees AS
+BEGIN
+	SELECT COUNT(*) FROM dbo.persons
+END

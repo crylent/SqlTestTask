@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net7.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWindowsForms>true</UseWindowsForms>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>12</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Forms\DbConnectionForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Forms\StaffViewer.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Forms\DateRangeForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Forms\DbConnectionForm.ru-ru.resx">
+        <DependentUpon>DbConnectionForm.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Forms\StaffViewer.ru-ru.resx">
+        <DependentUpon>StaffViewer.cs</DependentUpon>
+      </EmbeddedResource>
+    </ItemGroup>
+
+</Project>

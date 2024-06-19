@@ -1,0 +1,68 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="name" xml:space="preserve">
+        <value>ФИО</value>
+    </data>
+    <data name="status" xml:space="preserve">
+        <value>Статус</value>
+    </data>
+    <data name="dep" xml:space="preserve">
+        <value>Отдел</value>
+    </data>
+    <data name="post" xml:space="preserve">
+        <value>Должность</value>
+    </data>
+    <data name="date_employ" xml:space="preserve">
+        <value>Дата приёма</value>
+    </data>
+    <data name="date_unemploy" xml:space="preserve">
+        <value>Дата увольнения</value>
+    </data>
+    <data name="comboBox_default" xml:space="preserve">
+        <value>Неважно</value>
+    </data>
+    <data name="selectDateButtonText" xml:space="preserve">
+        <value>{0}—{1}</value>
+    </data>
+    <data name="applyFilters.Text" xml:space="preserve">
+        <value>Применить</value>
+    </data>
+    <data name="departmentLabel.Text" xml:space="preserve">
+        <value>Отдел</value>
+    </data>
+    <data name="filtering.Text" xml:space="preserve">
+        <value>Фильтры</value>
+    </data>
+    <data name="matchingEmployeesLabel.Text" xml:space="preserve">
+        <value>Найдено соответствий:</value>
+    </data>
+    <data name="nameLabel.Text" xml:space="preserve">
+        <value>Фамилия</value>
+    </data>
+    <data name="postLabel.Text" xml:space="preserve">
+        <value>Должность</value>
+    </data>
+    <data name="resetDate.Text" xml:space="preserve">
+        <value>Сброс</value>
+    </data>
+    <data name="resultBox.Text" xml:space="preserve">
+        <value>Результаты</value>
+    </data>
+    <data name="statusLabel.Text" xml:space="preserve">
+        <value>Статус</value>
+    </data>
+    <data name="totalEmployeesLabel.Text" xml:space="preserve">
+        <value>Всего работников:</value>
+    </data>
+</root>
