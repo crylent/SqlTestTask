@@ -51,7 +51,7 @@ partial class StaffViewer
         resultBox = new GroupBox();
         tableLayoutPanel2 = new TableLayoutPanel();
         totalEmployees = new Label();
-        matchingEmployees = new Label();
+        matchingEmployees = new LinkLabel();
         matchingEmployeesLabel = new Label();
         totalEmployeesLabel = new Label();
         ((ISupportInitialize)staffTable).BeginInit();
@@ -212,6 +212,8 @@ partial class StaffViewer
         // 
         resources.ApplyResources(matchingEmployees, "matchingEmployees");
         matchingEmployees.Name = "matchingEmployees";
+        matchingEmployees.TabStop = true;
+        matchingEmployees.LinkClicked += ShowPerDay;
         // 
         // matchingEmployeesLabel
         // 
@@ -270,5 +272,5 @@ partial class StaffViewer
     private Label matchingEmployeesLabel;
     private Label totalEmployeesLabel;
     private Label totalEmployees;
-    private Label matchingEmployees;
+    private LinkLabel matchingEmployees;
 }

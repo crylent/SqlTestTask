@@ -665,7 +665,7 @@
     <value>matchingEmployees</value>
   </data>
   <data name="&gt;&gt;matchingEmployees.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;matchingEmployees.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>

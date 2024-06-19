@@ -65,4 +65,10 @@
     <data name="totalEmployeesLabel.Text" xml:space="preserve">
         <value>Всего работников:</value>
     </data>
+    <data name="employedDates" xml:space="preserve">
+        <value>Статистика приёма</value>
+    </data>
+    <data name="unemployedDates" xml:space="preserve">
+        <value>Статистика увольнений</value>
+    </data>
 </root>

@@ -1,5 +1,6 @@
 using System.Data;
 using System.Resources;
+using System.Text;
 using Microsoft.Data.SqlClient;
 using SqlTestTask.Data;
 using SqlTestTask.Enums;
@@ -11,7 +12,7 @@ public partial class StaffViewer : Form
 {
     private readonly DbConnectionForm _connectionForm;
     private readonly DateRangeForm _dateRangeForm;
-    
+
     private readonly IDatabaseService _db;
     private readonly ICatalogService _catalogs;
 
@@ -26,11 +27,11 @@ public partial class StaffViewer : Form
         _db = db;
         _catalogs = catalogs;
         _dateRangeForm = dateRangeForm;
-        
+
         InitializeComponent();
         employmentUnemploymentDate.SelectedIndex = 0;
         LocalizeItems(employmentUnemploymentDate.Items);
-        
+
         OnStart();
     }
 
@@ -78,7 +79,7 @@ public partial class StaffViewer : Form
     private async Task UpdateTable(bool filter = false)
     {
         var table = await _db.SelectTable(StoredProcedure.GetStaffList, filter ? CreateParameters() : null);
-        _ = UpdateTotal();
+        _ = UpdateStats();
         foreach (DataColumn column in table.Columns)
         {
             var columnName = _rm.GetString(column.ColumnName);
@@ -88,10 +89,37 @@ public partial class StaffViewer : Form
         matchingEmployees.Text = table.Rows.Count.ToString();
     }
 
-    private async Task UpdateTotal()
+    private async Task UpdateStats()
     {
         var total = await _db.SelectValue<int>(StoredProcedure.GetTotalEmployees);
         totalEmployees.Text = total.ToString();
+    }
+
+    private async void ShowPerDay(object? sender, EventArgs eventArgs)
+    {
+        var showEmploys = employmentUnemploymentDate.SelectedIndex == 0;
+        var perDay = await _db.SelectTable(
+            showEmploys switch
+            {
+                true => StoredProcedure.GetEmployedPerDay,
+                false => StoredProcedure.GetUnemployedPerDay
+            }, CreatePerDayQueryParameters());
+        var builder = new StringBuilder();
+        foreach (DataRow row in perDay.Rows)
+        {
+            var date = (DateTime)row[0];
+            var count = (int)row[1];
+            builder.AppendFormat($"{date.ToShortDateString()}: {count}\r\n");
+        }
+        MessageBox.Show(
+            builder.ToString(),
+            _rm.GetString(showEmploys ? "employedDates" : "unemployedDates"),
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information,
+            MessageBoxDefaultButton.Button1,
+            MessageBoxOptions.DefaultDesktopOnly
+        );
+        Console.WriteLine(builder.ToString());
     }
 
     private SqlParameter[] CreateParameters() =>
@@ -104,6 +132,12 @@ public partial class StaffViewer : Form
         new SqlParameter("employed_until", GetDate(0, true)),
         new SqlParameter("unemployed_from", GetDate(1, false)),
         new SqlParameter("unemployed_until", GetDate(1, true)),
+    ];
+
+    private SqlParameter[] CreatePerDayQueryParameters() =>
+    [
+        new SqlParameter("from", _dateRange?.Start),
+        new SqlParameter("until", _dateRange?.End)
     ];
 
     private static int? GetVal(Catalog catalog, ComboBox comboBox)
@@ -133,11 +167,11 @@ public partial class StaffViewer : Form
         {
             _dateRange = await _dateRangeForm.WaitForSelection();
         }
-        catch (TaskCanceledException) {}
+        catch (TaskCanceledException) { }
 
         if (_dateRange is null) return;
         selectDate.Text = string.Format(
-            _rm.GetString("selectDateButtonText") ?? "{0}—{1}", 
+            _rm.GetString("selectDateButtonText") ?? "{0}—{1}",
             _dateRange.Start.ToShortDateString(),
             _dateRange.End.ToShortDateString()
             );
@@ -147,5 +181,10 @@ public partial class StaffViewer : Form
     {
         _dateRange = null;
         selectDate.Text = "";
+    }
+
+    private void matchingEmployees_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+
     }
 }
